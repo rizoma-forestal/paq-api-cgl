@@ -43,6 +43,12 @@ public class Guia implements Serializable {
     private Date fechaVencimiento;
     private Date fechaCierre; 
     private EstadoGuia estado;
+    /**
+     * Variable privada: guarda la cadena codificada con md5 
+     * a partir del código de la guía y la fecha de emisión 
+     * para generar el código QR de la guía en papel.
+     */   
+    private String codQr;    
     
     /******************
      * Constructores **
@@ -60,10 +66,11 @@ public class Guia implements Serializable {
         this.fechaVencimiento = new Date();
         this.fechaCierre = new Date();
         this.estado = new EstadoGuia();
+        this.codQr = "default";
     }
     
     public Guia(Long id, String codigo, String numFuente, List<ItemProductivo> items, EntidadGuia destino, Transporte transporte,
-            EntidadGuia origen, Date fechaAlta, Date fechaEmisionGuia, Date fechaVencimiento, Date fechaCierre, EstadoGuia estado){
+            EntidadGuia origen, Date fechaAlta, Date fechaEmisionGuia, Date fechaVencimiento, Date fechaCierre, EstadoGuia estado, String codQr){
         this.id = id;
         this.codigo = codigo;
         this.numFuente = numFuente;
@@ -76,6 +83,15 @@ public class Guia implements Serializable {
         this.fechaVencimiento = fechaVencimiento;
         this.fechaCierre = fechaCierre;
         this.estado = estado;
+        this.codQr = codQr;
+    }
+
+    public String getCodQr() {
+        return codQr;
+    }
+
+    public void setCodQr(String codQr) {
+        this.codQr = codQr;
     }
 
     public Long getId() {
@@ -206,6 +222,7 @@ public class Guia implements Serializable {
                 append(" fechaEmisionGuia: ").append(fechaEmisionGuia).
                 append(" fechaVencimiento: ").append(fechaVencimiento).
                 append(" fechaCierre: ").append(fechaCierre).
-                append(" estado: ").append(estado).toString();
+                append(" estado: ").append(estado).
+                append(" codQr: ").append(codQr).toString();
     }       
 }
